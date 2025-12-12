@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consejo de Hombres | Reflexiones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #141414;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent-gold: #d4af37;
+            --accent-bronze: #cd7f32;
+            --border-subtle: #2a2a2a;
+            --shadow-dark: rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 400px;
+            background: radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+        }
+
+        .dev-badge {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            opacity: 0.4;
+            transition: all 0.4s ease;
+        }
+
+        .dev-badge:hover {
+            opacity: 1;
+        }
+
+        .dev-badge a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 400;
+            margin-left: 3px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .dev-badge a:hover {
+            border-bottom-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .header-decoration {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0 auto 30px;
+        }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 40px 0 80px;
+        }
+
+        .quote-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            padding: 45px 40px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-bronze));
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .quote-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quote-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 20px 60px var(--shadow-dark);
+        }
+
+        .quote-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(212, 175, 55, 0.06);
+            font-family: 'Inter', sans-serif;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            text-align: justify;
+        }
+
+        .quote-text br {
+            content: "";
+            display: block;
+            margin-bottom: 0.8em;
+        }
+
+        .quote-text::before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -30px;
+            left: -15px;
+            color: var(--accent-gold);
+            opacity: 0.2;
+            font-family: 'Crimson Text', serif;
+            line-height: 1;
+        }
+
+        .quote-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-subtle);
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--accent-gold);
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+
+        .author-social {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .author-social:hover {
+            color: var(--accent-gold);
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .author-social:hover .social-icon {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .quotes-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 0 60px;
+            }
+
+            .quote-card {
+                padding: 35px 25px;
+            }
+
+            header {
+                padding: 60px 20px 40px;
+            }
+
+            .dev-badge {
+                top: 15px;
+                right: 15px;
+                font-size: 0.65rem;
+                opacity: 0.5;
+            }
+
+            .quote-text {
+                font-size: 1.15rem;
+            }
+
+            .quote-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quote-card {
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .quote-card:nth-child(1) { animation-delay: 0.1s; }
+        .quote-card:nth-child(2) { animation-delay: 0.2s; }
+        .quote-card:nth-child(3) { animation-delay: 0.3s; }
+        .quote-card:nth-child(4) { animation-delay: 0.4s; }
+        .quote-card:nth-child(5) { animation-delay: 0.5s; }
+        .quote-card:nth-child(n+6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="dev-badge">
+                <a href="https://instagram.com/jhonatan_alejandro_b" target="_blank">By: @jhonatan_alejandro_b</a>
+            </div>
+            <div class="header-decoration"></div>
+            <h1>Consejo de Hombres</h1>
+            <p class="subtitle">Reflexiones que Transforman</p>
+        </header>
+
+        <section class="quotes-grid" id="quotesGrid"></section>
+
+        <footer>
+            <p>JABA Consejo de Hombres © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // ========================================
+        // CONFIGURACIÓN DE FRASES
+        // Para agregar nuevas frases, añade objetos al array 'quotes'
+        // ========================================
+        
+        const quotes = [
+            {
+                text: "Y aquí estoy, mirando al vacío, donde ni el canto de los pájaros me logra acompañar. Ya no soy aquel Prometeo encendido en desafío, soy la voz que no insiste en que la quieras escuchar.\n\nCamino entre dudas que el alma no ha sabido nombrar, y en cada pensamiento descubro un trozo de mi propio lío. Porque a veces crecer es romper lo que uno solía cuidar, y entender que el silencio también enseña su propio brío.\n\nHoy no busco aplausos ni un destino fijo al cual llegar, solo ser fiel a mi esencia, aunque el mundo siga frío. Pues quien se encuentra a sí mismo, aunque tarde en llegar, nunca vuelve a temerle a la sombra ni al desvarío.",
+                author: "Jhonatan Alejandro Betancourt Arbelaez",
+                social: "@jhonatan_alejandro_b"
+            },
+            {
+                text: "Crecí con la creencia de que cuando el sol estaba afuera, era un buen día sin siquiera haber empezado. ¿Por qué el clima tormentoso no es sinónimo de alegría? Muchos dirían que es porque es oscuro y a veces peligroso. Es cierto, es oscuro y peligroso, pero hay personas que les gusta más la tormenta que el sol, como también hay personas que prefieren el sol antes que a la tormenta.\n\n\"No existen cosas malas ni buenas, solo existen gustos y preferencias.\"",
+                author: "Mario Santana",
+                social: "@xpm.mario"
+            },
+            {
+                text: "\"Es verdad que ninguna disciplina al presente parece ser causa de gozo, sino de tristeza; pero después da fruto apacible de justicia a los que en ella han sido ejercitados.\" — Hebreos 12:11\n\nTiempos de prueba y disciplina, aunque difíciles y tal vez más largos de lo que creemos resistir y soportar, finalmente terminan siendo momentos de gran crecimiento espiritual.\n\nQue nuestra mirada, confianza y esperanza en Jesucristo, nos lleven a permanecer y esperar en este tiempo en completo gozo, con la firme certeza de que nuestro Padre que nos ama. 😃",
+                author: "Luis Andrés",
+                social: ""
+            },
+            {
+                text: "Si el sol es lo más bonito del día y la luna lo más bonito de la noche, tú serías lo más bonito de mi vida.",
+                author: "JMOM",
+                social: ""
+            }
+            // Agrega más frases aquí siguiendo este formato:
+            // {
+            //     text: "Tu frase aquí...",
+            //     author: "Nombre del Autor",
+            //     social: "@usuario_instagram"
+            // }
+        ];
+
+        // ========================================
+        // RENDERIZADO AUTOMÁTICO
+        // No modificar el código a partir de aquí
+        // ========================================
+        
+        function renderQuotes() {
+            const quotesGrid = document.getElementById('quotesGrid');
+            
+            quotesGrid.innerHTML = quotes.map((quote, index) => {
+                let socialHtml = '';
+                
+                if (quote.social && quote.social.trim() !== '') {
+                    const socialLink = quote.social.startsWith('http') ? quote.social : 
+                                      quote.social.startsWith('@') ? `https://instagram.com/${quote.social.substring(1)}` :
+                                      `https://instagram.com/${quote.social}`;
+                    
+                    socialHtml = `
+                        <a href="${socialLink}" target="_blank" class="author-social">
+                            <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                            ${quote.social}
+                        </a>
+                    `;
+                }
+                
+                return `
+                    <div class="quote-card">
+                        <div class="quote-number">${String(index + 1).padStart(2, '0')}</div>
+                        <p class="quote-text">${quote.text.replace(/\n/g, '<br>')}</p>
+                        <div class="quote-footer">
+                            <div class="author-info">
+                                <div class="author-name">${quote.author}</div>
+                                ${socialHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Renderizar al cargar la página
+        renderQuotes();
+    </script>
+</body>
+</html>
