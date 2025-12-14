@@ -119,6 +119,103 @@
             text-transform: uppercase;
         }
 
+        .filters-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 30px;
+            padding: 12px 24px;
+            transition: all 0.3s ease;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-container:focus-within {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        #authorSearch {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            width: 100%;
+            letter-spacing: 0.02em;
+        }
+
+        #authorSearch::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .clear-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .clear-btn.visible {
+            display: flex;
+        }
+
+        .clear-btn:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .clear-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .quote-card.hidden {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+
+        .no-results h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
         .quotes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -272,6 +369,19 @@
                 padding: 60px 20px 40px;
             }
 
+            .filters-section {
+                padding: 30px 15px;
+            }
+
+            .search-container {
+                max-width: 100%;
+                padding: 10px 20px;
+            }
+
+            #authorSearch {
+                font-size: 0.9rem;
+            }
+
             .dev-badge {
                 top: 15px;
                 right: 15px;
@@ -316,17 +426,36 @@
     <div class="container">
         <header>
             <div class="dev-badge">
-                <a href="https://instagram.com/jhonatan_alejandro_b" target="_blank">By: @jhonatan_alejandro_b</a>
+                <a href="https://instagram.com/jhonatan_alejandro_b" target="_blank">@jhonatan_alejandro_b</a>
             </div>
             <div class="header-decoration"></div>
             <h1>Consejo de Hombres</h1>
-            <p class="subtitle">Pensares de quienes nos acompañan.</p>
+            <p class="subtitle">Reflexiones que Transforman</p>
         </header>
+
+        <section class="filters-section">
+            <div class="search-container">
+                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input 
+                    type="text" 
+                    id="authorSearch" 
+                    placeholder="Buscar por autor..."
+                    autocomplete="off"
+                >
+                <button class="clear-btn" id="clearSearch">
+                    <svg class="clear-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </section>
 
         <section class="quotes-grid" id="quotesGrid"></section>
 
         <footer>
-            <p>JABA Consejo de Hombres © 2025</p>
+            <p>Consejo de Hombres © 2024</p>
         </footer>
     </div>
 
@@ -356,13 +485,23 @@
                 text: "Si el sol es lo más bonito del día y la luna lo más bonito de la noche, tú serías lo más bonito de mi vida.",
                 author: "JMOM",
                 social: ""
+            },
+            {
+                text: "La gente busca una motivación para hacer las cosas y luego ver resultados, la verdad es que la formula no es Motivación - Acción - Resultados, porque si nunca encuentras motivación entonces nunca harás las cosas. La verdadera formula a seguir es Acción - Resultados - Motivación, una vez te pongas a hacer las cosas y veas resultados comenzarás a sentirte motivado para comenzar continuar con ello, la idea es comenzar, aún si no tienes ganas, aún si comienzas por poco para ir construyendo un hábito, pero comienza.",
+                author: "Parafraseado de algún youtuber de gym.",
+                social: ""
+            },
+            {
+                text: "La vida tiene dos caminos: el fácil y el correcto. El primero brilla como un atajo, suave y tentador, pero se desvanece cuando llega la noche. El segundo es áspero y largo, pero cada paso deja huella, y al final no solo te lleva a un destino, sino que te devuelve a ti mismo. ¿Qué camino vas a escoger tu?",
+                author: "Borja G. Aguado",
+                social: ""
+            },
+            {
+                text: "Las personas mediocres buscan una salida rápida a sus problemas del día a día, un placer momentáneo, como llegar y sentarse a ver la tele, tomarse una cerveza o cualquier cosa que los distraiga de sus problemas. Las personas exitosas prefieren ponerse a trabajar realmente en el problema (ahorrar, buscar un mejor trabajo, etc) para mejorar sus condiciones de vida y evitarse esos problemas. Si bien no les dará esa satisfacción momentánea que buscan los otros para olvidarse de sus problemas por un rato, si les dará una satisfacción más duradera a futuro al contrario de la otra persona que tendrá los mismos problemas todos los días por el resto de su vida.",
+                author: "ChronosPhoenix",
+                social: ""
             }
-            // Agrega más frases aquí siguiendo este formato:
-            // {
-            //     text: "Tu frase aquí...",
-            //     author: "Nombre del Autor",
-            //     social: "@usuario_instagram"
-            // }
+           
         ];
 
         // ========================================
@@ -392,7 +531,7 @@
                 }
                 
                 return `
-                    <div class="quote-card">
+                    <div class="quote-card" data-author="${quote.author.toLowerCase()}">
                         <div class="quote-number">${String(index + 1).padStart(2, '0')}</div>
                         <p class="quote-text">${quote.text.replace(/\n/g, '<br>')}</p>
                         <div class="quote-footer">
@@ -406,9 +545,66 @@
             }).join('');
         }
 
+        function filterQuotesBySearch(searchTerm) {
+            const cards = document.querySelectorAll('.quote-card');
+            const quotesGrid = document.getElementById('quotesGrid');
+            let visibleCount = 0;
+            
+            searchTerm = searchTerm.toLowerCase().trim();
+            
+            cards.forEach(card => {
+                const author = card.getAttribute('data-author');
+                
+                if (searchTerm === '' || author.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Mostrar mensaje si no hay resultados
+            const existingNoResults = document.querySelector('.no-results');
+            if (existingNoResults) {
+                existingNoResults.remove();
+            }
+            
+            if (visibleCount === 0 && searchTerm !== '') {
+                const noResultsDiv = document.createElement('div');
+                noResultsDiv.className = 'no-results';
+                noResultsDiv.innerHTML = `
+                    <h3>No se encontraron resultados</h3>
+                    <p>No hay frases del autor "${searchTerm}"</p>
+                `;
+                quotesGrid.appendChild(noResultsDiv);
+            }
+        }
+
+        // Event listeners para el input de búsqueda
+        const searchInput = document.getElementById('authorSearch');
+        const clearBtn = document.getElementById('clearSearch');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value;
+            filterQuotesBySearch(searchTerm);
+            
+            // Mostrar/ocultar botón de limpiar
+            if (searchTerm.length > 0) {
+                clearBtn.classList.add('visible');
+            } else {
+                clearBtn.classList.remove('visible');
+            }
+        });
+        
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterQuotesBySearch('');
+            this.classList.remove('visible');
+            searchInput.focus();
+        });
+
         // Renderizar al cargar la página
         renderQuotes();
     </script>
 </body>
-
-</html>
+    </html>
